@@ -1,0 +1,50 @@
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.pdb
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\obj\Debug\ResolveAssemblyReference.cache
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.MainWindow.resources
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.Properties.Resources.resources
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.csproj.GenerateResource.Cache
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.exe
+D:\wrk\i3c\trunk\Prototypes\Controls\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.pdb
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.exe
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.pdb
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.pdb
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.MainWindow.resources
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.PixelValueControl.resources
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.Properties.Resources.resources
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.csproj.GenerateResource.Cache
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe.config
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe.manifest
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.application
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.exe.manifest
+C:\Dokumente und Einstellungen\Andre Janßen\Eigene Dateien\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.application
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe.config
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.exe
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.pdb
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe.manifest
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.application
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.pdb
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.MainWindow.resources
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.PixelValueControl.resources
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.Properties.Resources.resources
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.csproj.GenerateResource.Cache
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.exe.manifest
+C:\Users\anjans\Documents\Visual Studio 2008\Projects\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.application
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe.config
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.exe
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.pdb
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.csprojResolveAssemblyReference.cache
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.MainWindow.resources
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.PixelValueControl.resources
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.Properties.Resources.resources
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.csproj.GenerateResource.Cache
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe.manifest
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.application
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.exe
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\bin\Debug\PixelZoomDlx.pdb
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.exe.manifest
+C:\Users\Andre\Source\PixelZoomDlx\PixelZoomDlx\obj\Debug\PixelZoomDlx.application

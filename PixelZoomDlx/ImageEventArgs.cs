@@ -33,5 +33,10 @@ namespace A9N.PixelZoomDlx
         {
             this.Image = image;
         }
+
+        ~ImageEventArgs()
+        {
+            this.Image?.Dispose();
+        }
     }
 }

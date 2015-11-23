@@ -13,12 +13,13 @@ namespace A9N.PixelZoomDlx
     class ZoomPainter : IDisposable
     {
         #region Fields
-        private Size displaySize;
-        private Pen cursorPen = new Pen(Color.Red);
-        private SolidBrush pixelBrush;
-        private Object paintLock = new Object();
-        private Task task;
-        private CancellationTokenSource tokenSource;
+        private Size _displaySize;
+        private Pen _cursorPen = new Pen(Color.Red);
+        private SolidBrush _pixelBrush;
+        private readonly Object _paintLock = new Object();
+        private Task _task;
+        private CancellationTokenSource _tokenSource;
+
         #endregion
 
         #region Events
@@ -28,6 +29,7 @@ namespace A9N.PixelZoomDlx
         internal event ImageEventHandler NewImage;
         #endregion
 
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="ZoomPainter"/> class.
@@ -35,24 +37,24 @@ namespace A9N.PixelZoomDlx
         /// <param name="displaySize">The display size.</param>
         public ZoomPainter(Size displaySize)
         {
-            this.AccurateImage = true;
             this.ZoomFactor = ZoomFactor.Depth4;
             this.DisplaySize = displaySize;
+            this._pixelBrush = new SolidBrush(Color.Black);
 
-            this.pixelBrush = new SolidBrush(Color.Black);
-
-            this.tokenSource = new CancellationTokenSource();
-            var token = tokenSource.Token;
+            this._tokenSource = new CancellationTokenSource();
+            var token = _tokenSource.Token;
 
             Action processImage = () =>
             {
                 while (!token.IsCancellationRequested)
                 {
                     ProcessImage();
+
+                    Thread.Sleep(1);
                 }
             };
 
-            task = Task.Factory.StartNew(processImage);
+            _task = Task.Factory.StartNew(processImage);
         }
         #endregion
 
@@ -64,30 +66,30 @@ namespace A9N.PixelZoomDlx
         public void Dispose()
         {
             // Cancel the image processing
-            if (tokenSource != null)
+            if (_tokenSource != null)
             {
-                tokenSource.Cancel();
-                tokenSource = null;
+                _tokenSource.Cancel();
+                _tokenSource = null;
             }
 
             // Wait until the task really has been finished
-            if (task != null)
+            if (_task != null)
             {
-                task.Wait();
-                task = null;
+                _task.Wait();
+                _task = null;
             }
 
             // Now dispose image related stuff
-            if (cursorPen != null)
+            if (_cursorPen != null)
             {
-                cursorPen.Dispose();
-                cursorPen = null;
+                _cursorPen.Dispose();
+                _cursorPen = null;
             }
 
-            if (pixelBrush != null)
+            if (_pixelBrush != null)
             {
-                pixelBrush.Dispose();
-                pixelBrush = null;
+                _pixelBrush.Dispose();
+                _pixelBrush = null;
             }
         }
 
@@ -98,28 +100,11 @@ namespace A9N.PixelZoomDlx
         {
             var zoomFactor = (int)this.ZoomFactor;
 
-            // Grab rectangle settings
-            int grabWidth = displaySize.Width / zoomFactor;
-            int grabHeight = displaySize.Height / zoomFactor;
-            var grabRect = new Rectangle(0, 0, grabWidth, grabHeight);
+            var grabRect = ZoomRectCalculator.GetGrabRectangle(_displaySize, zoomFactor);
 
-            // Cross-hair settings
-            int curserPosX = (displaySize.Width / 2) - zoomFactor - 2;
-            int curserPosY = (displaySize.Height / 2) - zoomFactor - 2;
-            int cursorWidth = zoomFactor + 1;
-            int curserHeight = zoomFactor + 1;
-            var cursorRect = new Rectangle(curserPosX, curserPosY, cursorWidth, curserHeight);
+            var cursorRect = ZoomRectCalculator.GetCursorRectangle(_displaySize, zoomFactor);
 
-            Image result = null;
-
-            if (AccurateImage)
-            {
-                result = GetAccurateImage(displaySize, grabRect, cursorRect, zoomFactor);
-            }
-            else
-            {
-                result = GetFastImage(displaySize, grabRect, cursorRect);
-            }
+            var result = GetAccurateImage(_displaySize, grabRect, cursorRect, zoomFactor);
 
             NotifyNewImage(result);
         }
@@ -130,69 +115,45 @@ namespace A9N.PixelZoomDlx
         /// </summary>
         private Image GetAccurateImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
         {
-            Bitmap sourceBitmap = new Bitmap(grabRect.Width, grabRect.Height);
-           
-            using (Graphics screenGraphics = Graphics.FromImage(sourceBitmap))
-            {
-                screenGraphics.CopyFromScreen(Cursor.Position.X - grabRect.Width / 2, Cursor.Position.Y - grabRect.Height / 2, 0, 0, grabRect.Size);
-            }
+            var resultBitmap = new Bitmap(displaySize.Width, displaySize.Height);
 
-            // Create ouput
-            Bitmap resultBitmap = new Bitmap(displaySize.Width, displaySize.Height);
-            
-            using (Graphics resultGraphics = Graphics.FromImage(resultBitmap))
+            using (var sourceBitmap = new Bitmap(grabRect.Width, grabRect.Height))
             {
-                resultGraphics.Clear(Color.Black);
-
-                for (int ty = grabRect.Height - 1; ty > 0; ty--)
+                using (var screenGraphics = Graphics.FromImage(sourceBitmap))
                 {
-                    for (int tx = grabRect.Width - 1; tx > 0; tx--)
-                    {
-                        int resultPositionY = (ty - 1) * zoomFactor - 1;
-                        int resultPositionX = (tx - 1) * zoomFactor - 1;
+                    var sourceX = Cursor.Position.X - grabRect.Width/2;
+                    var sourceY = Cursor.Position.Y - grabRect.Height/2;
 
-                        pixelBrush.Color = sourceBitmap.GetPixel(tx, ty);
-
-                        resultGraphics.FillRectangle(pixelBrush, resultPositionX, resultPositionY, zoomFactor, zoomFactor);
-                    }
+                    screenGraphics.CopyFromScreen(sourceX, sourceY, 0, 0, grabRect.Size);
                 }
 
-                // Draw cursor
-                resultGraphics.DrawRectangle(cursorPen, cursorRect);
+                using (var resultGraphics = Graphics.FromImage(resultBitmap))
+                {
+                    resultGraphics.Clear(Color.Black);
+
+                    for (int ty = grabRect.Height - 1; ty > 0; ty--)
+                    {
+                        for (int tx = grabRect.Width - 1; tx > 0; tx--)
+                        {
+                            int resultPositionY = (ty - 1) * zoomFactor - 1;
+                            int resultPositionX = (tx - 1) * zoomFactor - 1;
+
+                            _pixelBrush.Color = sourceBitmap.GetPixel(tx, ty);
+
+                            resultGraphics.FillRectangle(_pixelBrush,
+                                resultPositionX,
+                                resultPositionY,
+                                zoomFactor,
+                                zoomFactor);
+                        }
+                    }
+
+                    // Draw cursor
+                    resultGraphics.DrawRectangle(_cursorPen, cursorRect);
+                }
             }
 
             return resultBitmap;
-        }
-
-
-        /// <summary>
-        /// This is an try for a fast image display. The quality is very poor due to
-        /// much aliasing or something similiar. 
-        /// </summary>
-        private Image GetFastImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect)
-        {
-            Bitmap screenGrabBitmap = new Bitmap(grabRect.Width, grabRect.Height);
-            Graphics screenGrabGraphics = Graphics.FromImage(screenGrabBitmap);
-            screenGrabGraphics.CopyFromScreen(Cursor.Position.X - grabRect.Width / 2, Cursor.Position.Y - grabRect.Height / 2, 0, 0, grabRect.Size);
-            screenGrabGraphics.Dispose();
-
-            // Create ouput
-            Bitmap displayBitmap = new Bitmap(displaySize.Width, displaySize.Height);
-            Graphics displayGraphics = Graphics.FromImage(displayBitmap);
-
-            displayGraphics.Clear(Color.Black);
-            displayGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            displayGraphics.DrawImage(screenGrabBitmap,
-                new Rectangle(0, 0, displaySize.Width, displaySize.Height),
-                new Rectangle(0, 0, grabRect.Width, grabRect.Height),
-                GraphicsUnit.Pixel);
-
-            // Draw cursor
-            displayGraphics.DrawRectangle(cursorPen, cursorRect);
-            displayGraphics.Dispose();
-
-            return displayBitmap;
         }
 
         /// <summary>
@@ -201,19 +162,41 @@ namespace A9N.PixelZoomDlx
         /// <param name="image">The image.</param>
         private void NotifyNewImage(Image image)
         {
-            if (NewImage != null)
+            NewImage?.Invoke(this, new ImageEventArgs(image));
+        }
+
+        public void ZoomIn()
+        {
+            var nextFactor = (int)ZoomFactor * 2;
+
+            if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
             {
-                NewImage(this, new ImageEventArgs(image));
+                ZoomFactor = (ZoomFactor)nextFactor;
+            }
+        }
+
+        public void ZoomOut()
+        {
+            var nextFactor = (ZoomFactor)((int)ZoomFactor / 2);
+
+            if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
+            {
+                ZoomFactor = nextFactor;
             }
         }
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Gets or sets the accurate image.
-        /// </summary>
-        /// <value>The accurate image.</value>
-        public bool AccurateImage { get; set; }
+
+        public bool CanZoomOut
+        {
+            get { return this.ZoomFactor > ZoomFactor.Depth2; }
+        }
+
+        public bool CanZoomIn
+        {
+            get { return this.ZoomFactor < ZoomFactor.Depth8; }
+        }
 
         /// <summary>
         /// Gets or sets the display size.
@@ -221,12 +204,12 @@ namespace A9N.PixelZoomDlx
         /// <value>The display size.</value>
         public Size DisplaySize
         {
-            get { return displaySize; }
+            get { return _displaySize; }
             set
             {
-                lock (paintLock)
+                lock (_paintLock)
                 {
-                    this.displaySize = value;
+                    this._displaySize = value;
                 }
             }
         }
@@ -235,7 +218,9 @@ namespace A9N.PixelZoomDlx
         /// Gets or sets the zoom factor.
         /// </summary>
         /// <value>The zoom factor.</value>
-        public ZoomFactor ZoomFactor { get; set; }
+        public ZoomFactor ZoomFactor { get; private set; }
         #endregion
+
+  
     }
 }

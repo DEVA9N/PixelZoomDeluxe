@@ -14,8 +14,8 @@ namespace A9N.PixelZoomDlx
     public partial class MainWindow : Form
     {
         #region Fields
-        private ZoomPainter zoom;
-        private MouseController mouse;
+        private readonly ZoomPainter zoom;
+        private readonly MouseController mouse;
         private bool isDisplayingImage;
         #endregion
 
@@ -34,7 +34,6 @@ namespace A9N.PixelZoomDlx
                 Text += " - " + version;
             }
 
-            this.currentPixelBox.Text = "Current";
             this.recentPixelBox1.Text = "Recent 1";
             this.recentPixelBox2.Text = "Recent 2";
             this.distanceBox.Text = "Distance R1 / R2";
@@ -53,13 +52,13 @@ namespace A9N.PixelZoomDlx
         /// Note this tiny trick which the self call via delegate.
         /// </summary>
         /// <param name="position">The position.</param>
-        public void DisplayMousePosition(Point position)
-        {
-            currentPixelBox.PixelColor = mouse.GetColor();
+        //public void DisplayMousePosition(Point position)
+        //{
+        //    currentPixelBox.PixelColor = mouse.GetColor();
 
-            // Top left pixel should start with 1, 1
-            currentPixelBox.Position = new Point(position.X + 1, position.Y + 1);
-        }
+        //    // Top left pixel should start with 1, 1
+        //    currentPixelBox.Position = new Point(position.X + 1, position.Y + 1);
+        //}
         #endregion
 
         #region Event Handling
@@ -83,11 +82,15 @@ namespace A9N.PixelZoomDlx
         /// <param name="e"></param>
         private void MainWindow_KeyPress(object sender, KeyPressEventArgs e)
         {
+
+
+
             recentPixelBox2.Position = recentPixelBox1.Position;
             recentPixelBox2.PixelColor = recentPixelBox1.PixelColor;
 
-            recentPixelBox1.Position = currentPixelBox.Position;
-            recentPixelBox1.PixelColor = currentPixelBox.PixelColor;
+            // Top left pixel should start with 1, 1
+            recentPixelBox1.Position = new Point(Cursor.Position.X + 1, Cursor.Position.Y + 1);
+            recentPixelBox1.PixelColor = mouse.GetColor();
 
             int varianceX = recentPixelBox2.Position.X.CompareTo(recentPixelBox1.Position.X);
             int varianceY = recentPixelBox2.Position.Y.CompareTo(recentPixelBox1.Position.Y);
@@ -114,19 +117,10 @@ namespace A9N.PixelZoomDlx
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonZoomOut_Click(object sender, EventArgs e)
         {
-            var nextFactor = (ZoomFactor)((int)zoom.ZoomFactor / 2);
+            zoom.ZoomOut();
 
-            if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
-            {
-                zoom.ZoomFactor = nextFactor;
-
-                buttonZoomIn.Enabled = true;
-            }
-
-            if (zoom.ZoomFactor == ZoomFactor.Depth2)
-            {
-                buttonZoomOut.Enabled = false;
-            }
+            buttonZoomIn.Enabled = zoom.CanZoomIn;
+            buttonZoomOut.Enabled = zoom.CanZoomOut;
         }
 
         /// <summary>
@@ -136,19 +130,10 @@ namespace A9N.PixelZoomDlx
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void buttonZoomIn_Click(object sender, EventArgs e)
         {
-            var nextFactor = (int)zoom.ZoomFactor * 2;
+            zoom.ZoomIn();
 
-            if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
-            {
-                zoom.ZoomFactor = (ZoomFactor)nextFactor;
-
-                buttonZoomOut.Enabled = true;
-            }
-
-            if (zoom.ZoomFactor == ZoomFactor.Depth8)
-            {
-                buttonZoomIn.Enabled = false;
-            }
+            buttonZoomIn.Enabled = zoom.CanZoomIn;
+            buttonZoomOut.Enabled = zoom.CanZoomOut;
         }
 
         /// <summary>
@@ -169,16 +154,6 @@ namespace A9N.PixelZoomDlx
         }
 
         /// <summary>
-        /// Handles the CheckedChanged event of the checkBoxAccurate control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void checkBoxAccurate_CheckedChanged(object sender, EventArgs e)
-        {
-            zoom.AccurateImage = checkBoxAccurate.Checked;
-        }
-
-        /// <summary>
         /// Handles the NewImage event of the zoom control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -195,8 +170,6 @@ namespace A9N.PixelZoomDlx
                 isDisplayingImage = true;
 
                 pictureBox.Image = e.Image;
-
-                DisplayMousePosition(Cursor.Position);
 
                 isDisplayingImage = false;
             };

@@ -30,12 +30,16 @@ namespace A9N.PixelZoomDlx
         /// <returns>The color value.</returns> 
         public Color GetColor()
         {
-            IntPtr dc = WindowsApi.GetWindowDC(IntPtr.Zero);
+            var desktopWindow = WindowsApi.GetDesktopWindow();
+            var deviceContext = WindowsApi.GetWindowDC(desktopWindow);
 
-            POINT p;
-            WindowsApi.GetCursorPos(out p);
+            POINT cursor;
+            WindowsApi.GetCursorPos(out cursor);
 
-            long color = WindowsApi.GetPixel(dc, p.X, p.Y);
+            var color = WindowsApi.GetPixel(deviceContext, cursor.X, cursor.Y);
+
+            WindowsApi. ReleaseDC(desktopWindow, deviceContext);
+
             return Color.FromArgb((int)color);
         }
 

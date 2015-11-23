@@ -23,8 +23,16 @@ namespace A9N.PixelZoomDlx
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool GetCursorPos(out POINT pt);
 
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetDesktopWindow();
+
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetWindowDC(IntPtr hWnd);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int ReleaseDC(IntPtr window, IntPtr dc);
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

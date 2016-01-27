@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -27,12 +28,7 @@ namespace A9N.PixelZoomDlx
         {
             InitializeComponent();
 
-            // Add version string to title text
-            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
-            {
-                String version = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
-                Text += " - " + version;
-            }
+            AddVersionTitle();
 
             this.recentPixelBox1.Text = "Recent 1";
             this.recentPixelBox2.Text = "Recent 2";
@@ -44,24 +40,29 @@ namespace A9N.PixelZoomDlx
             zoom = new ZoomPainter(pictureBox.Size);
             zoom.NewImage += zoom_NewImage;
         }
+
+        private void AddVersionTitle()
+        {
+            try
+            {
+                // Add version string to title text
+                if (ApplicationDeployment.IsNetworkDeployed)
+                {
+                    String version = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+
+                    if (!String.IsNullOrWhiteSpace(version))
+                    {
+                        Text += " - " + version;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Don't care
+            }
+        }
         #endregion
 
-        #region Methods
-        /// <summary>
-        /// Show mouse position in status bar (thread-safe)
-        /// Note this tiny trick which the self call via delegate.
-        /// </summary>
-        /// <param name="position">The position.</param>
-        //public void DisplayMousePosition(Point position)
-        //{
-        //    currentPixelBox.PixelColor = mouse.GetColor();
-
-        //    // Top left pixel should start with 1, 1
-        //    currentPixelBox.Position = new Point(position.X + 1, position.Y + 1);
-        //}
-        #endregion
-
-        #region Event Handling
         /// <summary>
         /// Final steps when the programm is closed. Kills render thread and resets 
         /// mouse speed to original settings.
@@ -183,7 +184,6 @@ namespace A9N.PixelZoomDlx
                 displayImage();
             }
         }
-        #endregion
 
     }
 }

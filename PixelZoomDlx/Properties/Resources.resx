@@ -114,4 +114,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MainWindow_Recent_1" xml:space="preserve">
+    <value>Recent 1</value>
+  </data>
+  <data name="MainWindow_Recent_2" xml:space="preserve">
+    <value>Recent 2</value>
+  </data>
+  <data name="MainWindow_Distance_R1___R2" xml:space="preserve">
+    <value>Distance R1 / R2</value>
+  </data>
 </root>

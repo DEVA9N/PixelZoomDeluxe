@@ -85,6 +85,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ZoomImageBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ImageEventArgs.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -100,7 +103,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PixelValueControl.resx">
+    <EmbeddedResource Include="Controls\PixelValueControl.resx">
       <DependentUpon>PixelValueControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -117,10 +120,10 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <Compile Include="PixelValueControl.cs">
+    <Compile Include="Controls\PixelValueControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PixelValueControl.Designer.cs">
+    <Compile Include="Controls\PixelValueControl.Designer.cs">
       <DependentUpon>PixelValueControl.cs</DependentUpon>
     </Compile>
     <Compile Include="WindowsApi.cs" />

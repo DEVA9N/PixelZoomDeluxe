@@ -59,5 +59,32 @@ namespace A9N.PixelZoomDlx.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance R1 / R2.
+        /// </summary>
+        internal static string MainWindow_Distance_R1___R2 {
+            get {
+                return ResourceManager.GetString("MainWindow_Distance_R1___R2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent 1.
+        /// </summary>
+        internal static string MainWindow_Recent_1 {
+            get {
+                return ResourceManager.GetString("MainWindow_Recent_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent 2.
+        /// </summary>
+        internal static string MainWindow_Recent_2 {
+            get {
+                return ResourceManager.GetString("MainWindow_Recent_2", resourceCulture);
+            }
+        }
     }
 }

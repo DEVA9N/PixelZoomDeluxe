@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace A9N.PixelZoomDlx
 {
@@ -32,11 +31,6 @@ namespace A9N.PixelZoomDlx
         public ImageEventArgs(Image image)
         {
             this.Image = image;
-        }
-
-        ~ImageEventArgs()
-        {
-            this.Image?.Dispose();
         }
     }
 }

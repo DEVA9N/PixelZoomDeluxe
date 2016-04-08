@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -12,7 +11,6 @@ namespace A9N.PixelZoomDlx
 {
     class ZoomPainter : IDisposable
     {
-        #region Fields
         private Size _displaySize;
         private Pen _cursorPen = new Pen(Color.Red);
         private SolidBrush _pixelBrush;
@@ -20,49 +18,19 @@ namespace A9N.PixelZoomDlx
         private Task _task;
         private CancellationTokenSource _tokenSource;
 
-        #endregion
-
-        #region Events
-        /// <summary>
-        /// Occurs when a new image is available.
-        /// </summary>
         internal event ImageEventHandler NewImage;
-        #endregion
 
+        public ZoomFactor ZoomFactor { get; set; }
 
-        #region Constructor
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ZoomPainter"/> class.
-        /// </summary>
-        /// <param name="displaySize">The display size.</param>
         public ZoomPainter(Size displaySize)
         {
             this.ZoomFactor = ZoomFactor.Depth4;
-            this.DisplaySize = displaySize;
-            this._pixelBrush = new SolidBrush(Color.Black);
+            _displaySize = displaySize;
+            _pixelBrush = new SolidBrush(Color.Black);
 
-            this._tokenSource = new CancellationTokenSource();
-            var token = _tokenSource.Token;
-
-            Action processImage = () =>
-            {
-                while (!token.IsCancellationRequested)
-                {
-                    ProcessImage();
-
-                    Thread.Sleep(1);
-                }
-            };
-
-            _task = Task.Factory.StartNew(processImage);
+            StartProcessImageTask();
         }
-        #endregion
 
-        #region Methods
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        /// <exception cref="System.NotImplementedException"></exception>
         public void Dispose()
         {
             // Cancel the image processing
@@ -93,9 +61,24 @@ namespace A9N.PixelZoomDlx
             }
         }
 
-        /// <summary>
-        /// Processes the image.
-        /// </summary>
+        private void StartProcessImageTask()
+        {
+            _tokenSource = new CancellationTokenSource();
+            var token = _tokenSource.Token;
+
+            Action processImage = () =>
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    ProcessImage();
+
+                    Thread.Sleep(1);
+                }
+            };
+
+            _task = Task.Factory.StartNew(processImage);
+        }
+
         private void ProcessImage()
         {
             var zoomFactor = (int)this.ZoomFactor;
@@ -109,10 +92,6 @@ namespace A9N.PixelZoomDlx
             NotifyNewImage(result);
         }
 
-        /// <summary>
-        /// Display image. This routine is slow and very little optimized. But it's accurate and
-        /// fast enough for normal computers.
-        /// </summary>
         private Image GetAccurateImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
         {
             var resultBitmap = new Bitmap(displaySize.Width, displaySize.Height);
@@ -121,8 +100,8 @@ namespace A9N.PixelZoomDlx
             {
                 using (var screenGraphics = Graphics.FromImage(sourceBitmap))
                 {
-                    var sourceX = Cursor.Position.X - grabRect.Width/2;
-                    var sourceY = Cursor.Position.Y - grabRect.Height/2;
+                    var sourceX = Cursor.Position.X - grabRect.Width / 2;
+                    var sourceY = Cursor.Position.Y - grabRect.Height / 2;
 
                     screenGraphics.CopyFromScreen(sourceX, sourceY, 0, 0, grabRect.Size);
                 }
@@ -156,71 +135,19 @@ namespace A9N.PixelZoomDlx
             return resultBitmap;
         }
 
-        /// <summary>
-        /// Notifies the new image.
-        /// </summary>
-        /// <param name="image">The image.</param>
         private void NotifyNewImage(Image image)
         {
             NewImage?.Invoke(this, new ImageEventArgs(image));
         }
 
-        public void ZoomIn()
+        public void SetDisplaySize(Size size)
         {
-            var nextFactor = (int)ZoomFactor * 2;
-
-            if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
+            lock (_paintLock)
             {
-                ZoomFactor = (ZoomFactor)nextFactor;
+                _displaySize = size;
             }
         }
 
-        public void ZoomOut()
-        {
-            var nextFactor = (ZoomFactor)((int)ZoomFactor / 2);
 
-            if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
-            {
-                ZoomFactor = nextFactor;
-            }
-        }
-        #endregion
-
-        #region Properties
-
-        public bool CanZoomOut
-        {
-            get { return this.ZoomFactor > ZoomFactor.Depth2; }
-        }
-
-        public bool CanZoomIn
-        {
-            get { return this.ZoomFactor < ZoomFactor.Depth8; }
-        }
-
-        /// <summary>
-        /// Gets or sets the display size.
-        /// </summary>
-        /// <value>The display size.</value>
-        public Size DisplaySize
-        {
-            get { return _displaySize; }
-            set
-            {
-                lock (_paintLock)
-                {
-                    this._displaySize = value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the zoom factor.
-        /// </summary>
-        /// <value>The zoom factor.</value>
-        public ZoomFactor ZoomFactor { get; private set; }
-        #endregion
-
-  
     }
 }

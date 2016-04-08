@@ -35,7 +35,5 @@ namespace A9N.PixelZoomDlx
                 Width = cursorWidth,
             };
         }
-
-      
     }
 }

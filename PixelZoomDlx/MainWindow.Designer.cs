@@ -1,4 +1,6 @@
-﻿namespace A9N.PixelZoomDlx
+﻿using A9N.PixelZoomDlx.Controls;
+
+namespace A9N.PixelZoomDlx
 {
 	partial class MainWindow
 	{
@@ -16,8 +18,6 @@
 			if (disposing && (components != null))
 			{
 				components.Dispose();
-
-                zoom.Dispose();
             }
 			base.Dispose(disposing);
 		}
@@ -32,10 +32,10 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new A9N.PixelZoomDlx.Controls.ZoomImageBox();
             this.flowLayoutPanelRight = new System.Windows.Forms.FlowLayoutPanel();
-            this.recentPixelBox1 = new A9N.PixelZoomDlx.PixelValueControl();
-            this.recentPixelBox2 = new A9N.PixelZoomDlx.PixelValueControl();
+            this.currentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
+            this.recentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
             this.distanceBox = new A9N.PixelZoomDlx.PixelValueControl();
             this.buttonZoomOut = new System.Windows.Forms.Button();
             this.buttonZoomIn = new System.Windows.Forms.Button();
@@ -51,19 +51,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
             this.pictureBox.Location = new System.Drawing.Point(13, 13);
             this.pictureBox.MinimumSize = new System.Drawing.Size(400, 400);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(400, 400);
             this.pictureBox.TabIndex = 3;
             this.pictureBox.TabStop = false;
-            this.pictureBox.Resize += new System.EventHandler(this.pictureBox_Resize);
             // 
             // flowLayoutPanelRight
             // 
             this.flowLayoutPanelRight.AutoSize = true;
-            this.flowLayoutPanelRight.Controls.Add(this.recentPixelBox1);
-            this.flowLayoutPanelRight.Controls.Add(this.recentPixelBox2);
+            this.flowLayoutPanelRight.Controls.Add(this.currentPixelBox);
+            this.flowLayoutPanelRight.Controls.Add(this.recentPixelBox);
             this.flowLayoutPanelRight.Controls.Add(this.distanceBox);
             this.flowLayoutPanelRight.Controls.Add(this.buttonZoomOut);
             this.flowLayoutPanelRight.Controls.Add(this.buttonZoomIn);
@@ -74,29 +74,29 @@
             this.flowLayoutPanelRight.Size = new System.Drawing.Size(182, 427);
             this.flowLayoutPanelRight.TabIndex = 6;
             // 
-            // recentPixelBox1
+            // currentPixelBox
             // 
-            this.recentPixelBox1.Location = new System.Drawing.Point(0, 3);
-            this.recentPixelBox1.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.recentPixelBox1.MinimumSize = new System.Drawing.Size(160, 70);
-            this.recentPixelBox1.Name = "recentPixelBox1";
-            this.recentPixelBox1.PixelColor = System.Drawing.Color.Empty;
-            this.recentPixelBox1.Position = new System.Drawing.Point(0, 0);
-            this.recentPixelBox1.ShowColor = true;
-            this.recentPixelBox1.Size = new System.Drawing.Size(172, 70);
-            this.recentPixelBox1.TabIndex = 7;
+            this.currentPixelBox.Location = new System.Drawing.Point(0, 3);
+            this.currentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
+            this.currentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.currentPixelBox.Name = "currentPixelBox";
+            this.currentPixelBox.PixelColor = System.Drawing.Color.Empty;
+            this.currentPixelBox.Position = new System.Drawing.Point(0, 0);
+            this.currentPixelBox.ShowColor = true;
+            this.currentPixelBox.Size = new System.Drawing.Size(172, 70);
+            this.currentPixelBox.TabIndex = 7;
             // 
-            // recentPixelBox2
+            // recentPixelBox
             // 
-            this.recentPixelBox2.Location = new System.Drawing.Point(0, 79);
-            this.recentPixelBox2.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.recentPixelBox2.MinimumSize = new System.Drawing.Size(160, 70);
-            this.recentPixelBox2.Name = "recentPixelBox2";
-            this.recentPixelBox2.PixelColor = System.Drawing.Color.Empty;
-            this.recentPixelBox2.Position = new System.Drawing.Point(0, 0);
-            this.recentPixelBox2.ShowColor = true;
-            this.recentPixelBox2.Size = new System.Drawing.Size(172, 70);
-            this.recentPixelBox2.TabIndex = 14;
+            this.recentPixelBox.Location = new System.Drawing.Point(0, 79);
+            this.recentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
+            this.recentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.recentPixelBox.Name = "recentPixelBox";
+            this.recentPixelBox.PixelColor = System.Drawing.Color.Empty;
+            this.recentPixelBox.Position = new System.Drawing.Point(0, 0);
+            this.recentPixelBox.ShowColor = true;
+            this.recentPixelBox.Size = new System.Drawing.Size(172, 70);
+            this.recentPixelBox.TabIndex = 14;
             // 
             // distanceBox
             // 
@@ -145,7 +145,7 @@
             this.checkBoxMouseSpeed.Size = new System.Drawing.Size(23, 23);
             this.checkBoxMouseSpeed.TabIndex = 12;
             this.checkBoxMouseSpeed.Text = ":";
-            this.toolTip.SetToolTip(this.checkBoxMouseSpeed, "Reduce Mouse Speed");
+            this.toolTip.SetToolTip(this.checkBoxMouseSpeed, "Reduce Mouse Speed (m)");
             this.checkBoxMouseSpeed.UseVisualStyleBackColor = true;
             this.checkBoxMouseSpeed.CheckedChanged += new System.EventHandler(this.checkBoxMouseSpeed_CheckedChanged);
             // 
@@ -163,8 +163,6 @@
             this.Name = "MainWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "PixelZoomDlx";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainWindow_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.flowLayoutPanelRight.ResumeLayout(false);
             this.flowLayoutPanelRight.PerformLayout();
@@ -175,15 +173,15 @@
 
 		#endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
+        private ZoomImageBox pictureBox;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelRight;
-		private PixelValueControl recentPixelBox1;
+		private PixelValueControl currentPixelBox;
 		private PixelValueControl distanceBox;
         private System.Windows.Forms.Button buttonZoomIn;
         private System.Windows.Forms.Button buttonZoomOut;
         private System.Windows.Forms.CheckBox checkBoxMouseSpeed;
         private System.Windows.Forms.ToolTip toolTip;
-        private PixelValueControl recentPixelBox2;
+        private PixelValueControl recentPixelBox;
 
 	}
 }

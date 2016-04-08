@@ -30,9 +30,9 @@ namespace A9N.PixelZoomDlx
 
         private void InitializePixelValueBoxes()
         {
-            this.currentPixelBox.Text = Resources.MainWindow_Recent_1;
-            this.recentPixelBox.Text = Resources.MainWindow_Recent_2;
-            this.distanceBox.Text = Resources.MainWindow_Distance_R1___R2;
+            this.currentPixelBox.Text = Resources.MainWindow_Current;
+            this.recentPixelBox.Text = Resources.MainWindow_Recent;
+            this.distanceBox.Text = Resources.MainWindow_Distance;
         }
 
         private void AddVersionTitle()

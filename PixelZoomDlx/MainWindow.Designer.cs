@@ -32,32 +32,18 @@ namespace A9N.PixelZoomDlx
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.pictureBox = new A9N.PixelZoomDlx.Controls.ZoomImageBox();
             this.flowLayoutPanelRight = new System.Windows.Forms.FlowLayoutPanel();
-            this.currentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
-            this.recentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
-            this.distanceBox = new A9N.PixelZoomDlx.PixelValueControl();
             this.buttonZoomOut = new System.Windows.Forms.Button();
             this.buttonZoomIn = new System.Windows.Forms.Button();
             this.checkBoxMouseSpeed = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.currentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
+            this.recentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
+            this.distanceBox = new A9N.PixelZoomDlx.PixelValueControl();
+            this.pictureBox = new A9N.PixelZoomDlx.Controls.ZoomImageBox();
             this.flowLayoutPanelRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
-            this.pictureBox.Location = new System.Drawing.Point(13, 13);
-            this.pictureBox.MinimumSize = new System.Drawing.Size(400, 400);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(400, 400);
-            this.pictureBox.TabIndex = 3;
-            this.pictureBox.TabStop = false;
             // 
             // flowLayoutPanelRight
             // 
@@ -73,42 +59,6 @@ namespace A9N.PixelZoomDlx
             this.flowLayoutPanelRight.Name = "flowLayoutPanelRight";
             this.flowLayoutPanelRight.Size = new System.Drawing.Size(182, 427);
             this.flowLayoutPanelRight.TabIndex = 6;
-            // 
-            // currentPixelBox
-            // 
-            this.currentPixelBox.Location = new System.Drawing.Point(0, 3);
-            this.currentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.currentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
-            this.currentPixelBox.Name = "currentPixelBox";
-            this.currentPixelBox.PixelColor = System.Drawing.Color.Empty;
-            this.currentPixelBox.Position = new System.Drawing.Point(0, 0);
-            this.currentPixelBox.ShowColor = true;
-            this.currentPixelBox.Size = new System.Drawing.Size(172, 70);
-            this.currentPixelBox.TabIndex = 7;
-            // 
-            // recentPixelBox
-            // 
-            this.recentPixelBox.Location = new System.Drawing.Point(0, 79);
-            this.recentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.recentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
-            this.recentPixelBox.Name = "recentPixelBox";
-            this.recentPixelBox.PixelColor = System.Drawing.Color.Empty;
-            this.recentPixelBox.Position = new System.Drawing.Point(0, 0);
-            this.recentPixelBox.ShowColor = true;
-            this.recentPixelBox.Size = new System.Drawing.Size(172, 70);
-            this.recentPixelBox.TabIndex = 14;
-            // 
-            // distanceBox
-            // 
-            this.distanceBox.Location = new System.Drawing.Point(0, 155);
-            this.distanceBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.distanceBox.MinimumSize = new System.Drawing.Size(160, 70);
-            this.distanceBox.Name = "distanceBox";
-            this.distanceBox.PixelColor = System.Drawing.Color.Empty;
-            this.distanceBox.Position = new System.Drawing.Point(0, 0);
-            this.distanceBox.ShowColor = false;
-            this.distanceBox.Size = new System.Drawing.Size(172, 70);
-            this.distanceBox.TabIndex = 8;
             // 
             // buttonZoomOut
             // 
@@ -149,6 +99,56 @@ namespace A9N.PixelZoomDlx
             this.checkBoxMouseSpeed.UseVisualStyleBackColor = true;
             this.checkBoxMouseSpeed.CheckedChanged += new System.EventHandler(this.checkBoxMouseSpeed_CheckedChanged);
             // 
+            // currentPixelBox
+            // 
+            this.currentPixelBox.Location = new System.Drawing.Point(0, 3);
+            this.currentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
+            this.currentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.currentPixelBox.Name = "currentPixelBox";
+            this.currentPixelBox.PixelColor = System.Drawing.Color.Empty;
+            this.currentPixelBox.Position = new System.Drawing.Point(0, 0);
+            this.currentPixelBox.ShowColor = true;
+            this.currentPixelBox.Size = new System.Drawing.Size(172, 70);
+            this.currentPixelBox.TabIndex = 7;
+            // 
+            // recentPixelBox
+            // 
+            this.recentPixelBox.Location = new System.Drawing.Point(0, 79);
+            this.recentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
+            this.recentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.recentPixelBox.Name = "recentPixelBox";
+            this.recentPixelBox.PixelColor = System.Drawing.Color.Empty;
+            this.recentPixelBox.Position = new System.Drawing.Point(0, 0);
+            this.recentPixelBox.ShowColor = true;
+            this.recentPixelBox.Size = new System.Drawing.Size(172, 70);
+            this.recentPixelBox.TabIndex = 14;
+            // 
+            // distanceBox
+            // 
+            this.distanceBox.Location = new System.Drawing.Point(0, 155);
+            this.distanceBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
+            this.distanceBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.distanceBox.Name = "distanceBox";
+            this.distanceBox.PixelColor = System.Drawing.Color.Empty;
+            this.distanceBox.Position = new System.Drawing.Point(0, 0);
+            this.distanceBox.ShowColor = false;
+            this.distanceBox.Size = new System.Drawing.Size(172, 70);
+            this.distanceBox.TabIndex = 8;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
+            this.pictureBox.Location = new System.Drawing.Point(13, 13);
+            this.pictureBox.MinimumSize = new System.Drawing.Size(400, 400);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,9 +163,9 @@ namespace A9N.PixelZoomDlx
             this.Name = "MainWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "PixelZoomDlx";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.flowLayoutPanelRight.ResumeLayout(false);
             this.flowLayoutPanelRight.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

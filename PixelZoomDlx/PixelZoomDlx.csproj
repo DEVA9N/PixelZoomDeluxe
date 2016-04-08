@@ -12,7 +12,7 @@
     <AssemblyName>PixelZoomDlx</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>search.ico</ApplicationIcon>
+    <ApplicationIcon>1460128757_search.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>7B1A65F489015DA43392F2F3134B21A2C2A2FE6C</ManifestCertificateThumbprint>
     <ManifestKeyFile>PixelZoomDlx_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
@@ -37,8 +37,8 @@
     <SupportUrl>http://a9n.de</SupportUrl>
     <ProductName>PixelZoomDlx</ProductName>
     <PublisherName>A9N</PublisherName>
-    <ApplicationRevision>12</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -131,9 +131,6 @@
     <Compile Include="ZoomPainter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="search.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -164,6 +161,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1460128757_search.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

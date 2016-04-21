@@ -49,11 +49,15 @@ namespace A9N.PixelZoomDlx
             POINT cursor;
             WindowsApi.GetCursorPos(out cursor);
 
-            var color = WindowsApi.GetPixel(deviceContext, cursor.X, cursor.Y);
+            var pixel = WindowsApi.GetPixel(deviceContext, cursor.X, cursor.Y);
 
             WindowsApi.ReleaseDC(desktopWindow, deviceContext);
 
-            return Color.FromArgb((int)color);
+            var color = Color.FromArgb((int)(pixel & 0x000000FF),
+                                (int)(pixel & 0x0000FF00) >> 8,
+                                (int)(pixel & 0x00FF0000) >> 16);
+
+            return color;
         }
 
         public void ToggleMouseSpeed()

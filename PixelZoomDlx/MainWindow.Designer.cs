@@ -64,7 +64,7 @@ namespace A9N.PixelZoomDlx
             // 
             this.buttonZoomOut.AutoSize = true;
             this.buttonZoomOut.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonZoomOut.Location = new System.Drawing.Point(3, 231);
+            this.buttonZoomOut.Location = new System.Drawing.Point(3, 261);
             this.buttonZoomOut.Name = "buttonZoomOut";
             this.buttonZoomOut.Size = new System.Drawing.Size(20, 23);
             this.buttonZoomOut.TabIndex = 10;
@@ -77,7 +77,7 @@ namespace A9N.PixelZoomDlx
             // 
             this.buttonZoomIn.AutoSize = true;
             this.buttonZoomIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonZoomIn.Location = new System.Drawing.Point(29, 231);
+            this.buttonZoomIn.Location = new System.Drawing.Point(29, 261);
             this.buttonZoomIn.Name = "buttonZoomIn";
             this.buttonZoomIn.Size = new System.Drawing.Size(23, 23);
             this.buttonZoomIn.TabIndex = 9;
@@ -90,7 +90,7 @@ namespace A9N.PixelZoomDlx
             // 
             this.checkBoxMouseSpeed.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxMouseSpeed.Font = new System.Drawing.Font("Wingdings 2", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.checkBoxMouseSpeed.Location = new System.Drawing.Point(58, 231);
+            this.checkBoxMouseSpeed.Location = new System.Drawing.Point(58, 261);
             this.checkBoxMouseSpeed.Name = "checkBoxMouseSpeed";
             this.checkBoxMouseSpeed.Size = new System.Drawing.Size(23, 23);
             this.checkBoxMouseSpeed.TabIndex = 12;
@@ -103,36 +103,36 @@ namespace A9N.PixelZoomDlx
             // 
             this.currentPixelBox.Location = new System.Drawing.Point(0, 3);
             this.currentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.currentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.currentPixelBox.MinimumSize = new System.Drawing.Size(160, 80);
             this.currentPixelBox.Name = "currentPixelBox";
             this.currentPixelBox.PixelColor = System.Drawing.Color.Empty;
             this.currentPixelBox.Position = new System.Drawing.Point(0, 0);
             this.currentPixelBox.ShowColor = true;
-            this.currentPixelBox.Size = new System.Drawing.Size(172, 70);
+            this.currentPixelBox.Size = new System.Drawing.Size(172, 80);
             this.currentPixelBox.TabIndex = 7;
             // 
             // recentPixelBox
             // 
-            this.recentPixelBox.Location = new System.Drawing.Point(0, 79);
+            this.recentPixelBox.Location = new System.Drawing.Point(0, 89);
             this.recentPixelBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.recentPixelBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.recentPixelBox.MinimumSize = new System.Drawing.Size(160, 80);
             this.recentPixelBox.Name = "recentPixelBox";
             this.recentPixelBox.PixelColor = System.Drawing.Color.Empty;
             this.recentPixelBox.Position = new System.Drawing.Point(0, 0);
             this.recentPixelBox.ShowColor = true;
-            this.recentPixelBox.Size = new System.Drawing.Size(172, 70);
+            this.recentPixelBox.Size = new System.Drawing.Size(172, 80);
             this.recentPixelBox.TabIndex = 14;
             // 
             // distanceBox
             // 
-            this.distanceBox.Location = new System.Drawing.Point(0, 155);
+            this.distanceBox.Location = new System.Drawing.Point(0, 175);
             this.distanceBox.Margin = new System.Windows.Forms.Padding(0, 3, 10, 3);
-            this.distanceBox.MinimumSize = new System.Drawing.Size(160, 70);
+            this.distanceBox.MinimumSize = new System.Drawing.Size(160, 80);
             this.distanceBox.Name = "distanceBox";
             this.distanceBox.PixelColor = System.Drawing.Color.Empty;
             this.distanceBox.Position = new System.Drawing.Point(0, 0);
             this.distanceBox.ShowColor = false;
-            this.distanceBox.Size = new System.Drawing.Size(172, 70);
+            this.distanceBox.Size = new System.Drawing.Size(172, 80);
             this.distanceBox.TabIndex = 8;
             // 
             // pictureBox

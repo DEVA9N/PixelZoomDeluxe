@@ -89,17 +89,22 @@ namespace A9N.PixelZoomDlx
         {
             base.OnKeyDown(e);
 
-            if (e.KeyData == Keys.M)
+            if (e.Modifiers != Keys.None)
             {
-                _mouse.ToggleMouseSpeed();
+                // Don't use shortcuts to update the pixel values 
+                // Shortcuts are reserved for copying values from the textboxes
+                return;
             }
-        }
 
-        protected override void OnKeyPress(KeyPressEventArgs e)
-        {
-            base.OnKeyPress(e);
-
-            UpdatePixelBoxValues();
+            switch (e.KeyCode)
+            {
+                case Keys.M:
+                    _mouse.ToggleMouseSpeed();
+                    break;
+                default:
+                    UpdatePixelBoxValues();
+                    break;
+            }
         }
 
         private void buttonZoomOut_Click(object sender, EventArgs e)

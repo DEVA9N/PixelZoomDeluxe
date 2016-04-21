@@ -25,7 +25,7 @@ namespace A9N.PixelZoomDlx
             set
             {
                 pixelColor = value;
-                labelARGBValue.Text = String.Format("{0} {1} {2} {3}", pixelColor.A, pixelColor.R, pixelColor.G, pixelColor.B);
+                textboxARGBValue.Text = String.Format("{0} {1} {2}", pixelColor.R, pixelColor.G, pixelColor.B);
             }
         }
 
@@ -36,8 +36,8 @@ namespace A9N.PixelZoomDlx
             {
                 position = value;
                 
-                labelXValue.Text = position.X.ToString();
-                labelYValue.Text = position.Y.ToString();
+                textboxXValue.Text = position.X.ToString();
+                textboxYValue.Text = position.Y.ToString();
             }
         }
 
@@ -47,7 +47,7 @@ namespace A9N.PixelZoomDlx
             set
             {
                 labelARGB.Visible = value;
-                labelARGBValue.Visible = value;
+                textboxARGBValue.Visible = value;
             }
         }
 

@@ -25,7 +25,9 @@ namespace A9N.PixelZoomDlx
             set
             {
                 pixelColor = value;
-                textboxARGBValue.Text = String.Format("{0} {1} {2}", pixelColor.R, pixelColor.G, pixelColor.B);
+                
+                textboxARGBValue.Text = $@"{pixelColor.R} {pixelColor.G} {pixelColor.B}";
+                textBoxHexValue.Text = $@"#{pixelColor.A:X2}{pixelColor.R:X2}{pixelColor.G:X2}{pixelColor.B:X2}";
             }
         }
 
@@ -48,6 +50,8 @@ namespace A9N.PixelZoomDlx
             {
                 labelARGB.Visible = value;
                 textboxARGBValue.Visible = value;
+                labelHex.Visible = value;
+                textBoxHexValue.Visible = value;
             }
         }
 

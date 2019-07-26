@@ -35,6 +35,8 @@
             this.labelARGB = new System.Windows.Forms.Label();
             this.labelY = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
+            this.textBoxHexValue = new System.Windows.Forms.TextBox();
+            this.labelHex = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,6 +45,8 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.textBoxHexValue);
+            this.groupBox1.Controls.Add(this.labelHex);
             this.groupBox1.Controls.Add(this.textboxARGBValue);
             this.groupBox1.Controls.Add(this.textboxYValue);
             this.groupBox1.Controls.Add(this.textboxXValue);
@@ -51,7 +55,7 @@
             this.groupBox1.Controls.Add(this.labelX);
             this.groupBox1.Location = new System.Drawing.Point(4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(153, 73);
+            this.groupBox1.Size = new System.Drawing.Size(153, 93);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
@@ -119,14 +123,35 @@
             this.labelX.TabIndex = 0;
             this.labelX.Text = "X:";
             // 
+            // textBoxHexValue
+            // 
+            this.textBoxHexValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxHexValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxHexValue.Location = new System.Drawing.Point(52, 73);
+            this.textBoxHexValue.Name = "textBoxHexValue";
+            this.textBoxHexValue.ReadOnly = true;
+            this.textBoxHexValue.Size = new System.Drawing.Size(95, 13);
+            this.textBoxHexValue.TabIndex = 9;
+            this.textBoxHexValue.TabStop = false;
+            // 
+            // labelHex
+            // 
+            this.labelHex.AutoSize = true;
+            this.labelHex.Location = new System.Drawing.Point(6, 73);
+            this.labelHex.Name = "labelHex";
+            this.labelHex.Size = new System.Drawing.Size(32, 13);
+            this.labelHex.TabIndex = 8;
+            this.labelHex.Text = "HEX:";
+            // 
             // PixelValueControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.MinimumSize = new System.Drawing.Size(160, 80);
+            this.MinimumSize = new System.Drawing.Size(160, 100);
             this.Name = "PixelValueControl";
-            this.Size = new System.Drawing.Size(160, 80);
+            this.Size = new System.Drawing.Size(160, 100);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -142,5 +167,7 @@
 		private System.Windows.Forms.TextBox textboxXValue;
 		private System.Windows.Forms.Label labelARGB;
 		private System.Windows.Forms.Label labelY;
-	}
+        private System.Windows.Forms.TextBox textBoxHexValue;
+        private System.Windows.Forms.Label labelHex;
+    }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PixelZoomDlx.Properties {
+namespace A9N.PixelZoomDlx.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PixelZoomDlx.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PixelZoomDlx.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("A9N.PixelZoomDlx.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,33 @@ namespace PixelZoomDlx.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current.
+        /// </summary>
+        internal static string MainWindow_Current {
+            get {
+                return ResourceManager.GetString("MainWindow_Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance.
+        /// </summary>
+        internal static string MainWindow_Distance {
+            get {
+                return ResourceManager.GetString("MainWindow_Distance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent.
+        /// </summary>
+        internal static string MainWindow_Recent {
+            get {
+                return ResourceManager.GetString("MainWindow_Recent", resourceCulture);
             }
         }
     }

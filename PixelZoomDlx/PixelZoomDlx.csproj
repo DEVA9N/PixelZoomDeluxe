@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>A9N.PixelZoomDlx</RootNamespace>
     <AssemblyName>PixelZoomDlx</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Resources\1460128757_search.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>7B1A65F489015DA43392F2F3134B21A2C2A2FE6C</ManifestCertificateThumbprint>
@@ -37,8 +37,8 @@
     <SupportUrl>http://a9n.de</SupportUrl>
     <ProductName>PixelZoomDlx</ProductName>
     <PublisherName>A9N</PublisherName>
-    <ApplicationRevision>6</ApplicationRevision>
-    <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

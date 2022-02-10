@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using A9N.PixelZoomDlx.Properties;
+using A9N.PixelZoomDlx.Windows;
 
 namespace A9N.PixelZoomDlx
 {

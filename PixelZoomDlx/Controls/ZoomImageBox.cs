@@ -1,32 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using A9N.PixelZoomDlx.Zoom;
 
 namespace A9N.PixelZoomDlx.Controls
 {
     internal sealed class ZoomImageBox : PictureBox
     {
-        private bool _isDisplayingImage;
         private readonly ZoomPainter _painter;
-
-        public bool CanZoomOut
-        {
-            get { return _painter.ZoomFactor > ZoomFactor.Depth4; }
-        }
-
-        public bool CanZoomIn
-        {
-            get { return _painter.ZoomFactor < ZoomFactor.Depth8; }
-        }
+        private bool _isDisplayingImage;
 
         public ZoomImageBox()
         {
-            this._painter = new ZoomPainter(this.Size);
-            this._painter.NewImage += Painter_NewImage;
+            _painter = new ZoomPainter(Size);
+            _painter.NewImage += Painter_NewImage;
         }
+
+        public bool CanZoomOut => _painter.ZoomFactor > ZoomFactor.Depth4;
+
+        public bool CanZoomIn => _painter.ZoomFactor < ZoomFactor.Depth8;
 
         protected override void Dispose(bool disposing)
         {
@@ -40,14 +32,11 @@ namespace A9N.PixelZoomDlx.Controls
 
         internal void DisplayImageAsync(Image image)
         {
-            Action displayImage = () =>
-            {
-                DisplayImage(image);
-            };
+            Action displayImage = () => { DisplayImage(image); };
 
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.BeginInvoke(displayImage);
+                BeginInvoke(displayImage);
             }
             else
             {
@@ -64,7 +53,7 @@ namespace A9N.PixelZoomDlx.Controls
 
             _isDisplayingImage = true;
 
-            this.Image = image;
+            Image = image;
 
             _isDisplayingImage = false;
         }
@@ -93,12 +82,12 @@ namespace A9N.PixelZoomDlx.Controls
         {
             base.OnResize(e);
 
-            _painter.SetDisplaySize(this.Size);
+            _painter.SetDisplaySize(Size);
         }
 
-        private void Painter_NewImage(object sender, ImageEventArgs e)
+        private void Painter_NewImage(object sender, Image e)
         {
-            DisplayImageAsync(e.Image);
+            DisplayImageAsync(e);
         }
     }
 }

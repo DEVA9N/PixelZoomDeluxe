@@ -12,7 +12,7 @@
     <AssemblyName>PixelZoomDlx</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>1460128757_search.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\1460128757_search.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>7B1A65F489015DA43392F2F3134B21A2C2A2FE6C</ManifestCertificateThumbprint>
     <ManifestKeyFile>PixelZoomDlx_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
@@ -88,17 +88,16 @@
     <Compile Include="Controls\ZoomImageBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageEventArgs.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MouseController.cs" />
+    <Compile Include="Windows\MouseController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZoomRectCalculator.cs" />
+    <Compile Include="Zoom\ZoomRectCalculator.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -126,9 +125,9 @@
     <Compile Include="Controls\PixelValueControl.Designer.cs">
       <DependentUpon>PixelValueControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="WindowsApi.cs" />
-    <Compile Include="ZoomEnums.cs" />
-    <Compile Include="ZoomPainter.cs" />
+    <Compile Include="Windows\WindowsApi.cs" />
+    <Compile Include="Zoom\ZoomEnums.cs" />
+    <Compile Include="Zoom\ZoomPainter.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -163,8 +162,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1460128757_search.ico" />
+    <Content Include="Resources\1460128757_search.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

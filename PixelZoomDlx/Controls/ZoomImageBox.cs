@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Drawing;
+using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using A9N.PixelZoomDlx.Zoom;
 
@@ -7,18 +8,26 @@ namespace A9N.PixelZoomDlx.Controls
 {
     internal sealed class ZoomImageBox : PictureBox
     {
+        private ZoomFactor _zoomFactor;
         private readonly ZoomPainter _painter;
-        private bool _isDisplayingImage;
+        private readonly CancellationTokenSource _tokenSource;
 
+        public bool CanZoomOut => _zoomFactor > ZoomFactor.Depth4;
+        public bool CanZoomIn => _zoomFactor < ZoomFactor.Depth8;
+        
         public ZoomImageBox()
         {
-            _painter = new ZoomPainter(Size);
-            _painter.NewImage += Painter_NewImage;
+            _zoomFactor = ZoomFactor.Depth4;
+            _painter = new ZoomPainter();
+            _tokenSource = new CancellationTokenSource();
         }
 
-        public bool CanZoomOut => _painter.ZoomFactor > ZoomFactor.Depth4;
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
 
-        public bool CanZoomIn => _painter.ZoomFactor < ZoomFactor.Depth8;
+            StartImageProcessing(_tokenSource.Token);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -26,68 +35,40 @@ namespace A9N.PixelZoomDlx.Controls
 
             if (disposing)
             {
+                _tokenSource.Cancel();
                 _painter.Dispose();
             }
         }
 
-        internal void DisplayImageAsync(Image image)
+        private async Task StartImageProcessing(CancellationToken token)
         {
-            Action displayImage = () => { DisplayImage(image); };
-
-            if (InvokeRequired)
+            await Task.Factory.StartNew(() =>
             {
-                BeginInvoke(displayImage);
-            }
-            else
-            {
-                displayImage();
-            }
-        }
-
-        private void DisplayImage(Image image)
-        {
-            if (_isDisplayingImage)
-            {
-                return;
-            }
-
-            _isDisplayingImage = true;
-
-            Image = image;
-
-            _isDisplayingImage = false;
+                while (!token.IsCancellationRequested)
+                {
+                    Image = _painter.GetZoomedImage(Size, (int)_zoomFactor);
+                }
+            }, TaskCreationOptions.LongRunning);
         }
 
         public void ZoomIn()
         {
-            var nextFactor = (int)_painter.ZoomFactor * 2;
+            var nextFactor = (int)_zoomFactor * 2;
 
             if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
             {
-                _painter.ZoomFactor = (ZoomFactor)nextFactor;
+                _zoomFactor = (ZoomFactor)nextFactor;
             }
         }
 
         public void ZoomOut()
         {
-            var nextFactor = (ZoomFactor)((int)_painter.ZoomFactor / 2);
+            var nextFactor = (ZoomFactor)((int)_zoomFactor / 2);
 
             if (Enum.IsDefined(typeof(ZoomFactor), nextFactor))
             {
-                _painter.ZoomFactor = nextFactor;
+                _zoomFactor = nextFactor;
             }
-        }
-
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-
-            _painter.DisplaySize = Size;
-        }
-
-        private void Painter_NewImage(object sender, Image e)
-        {
-            DisplayImageAsync(e);
         }
     }
 }

@@ -1,67 +1,33 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace A9N.PixelZoomDlx.Zoom
 {
-    internal class ZoomPainter : IDisposable
+    internal sealed class ZoomPainter : IDisposable
     {
-        private readonly Pen _cursorPen = new Pen(Color.Red);
+        private readonly Pen _cursorPen;
         private readonly SolidBrush _pixelBrush;
-        private readonly Task _task;
-        private readonly CancellationTokenSource _tokenSource;
 
-        internal event EventHandler<Image> NewImage;
-
-        public Size DisplaySize { get; set; }
-        public ZoomFactor ZoomFactor { get; set; }
-
-        public ZoomPainter(Size displaySize)
+        public ZoomPainter()
         {
-            ZoomFactor = ZoomFactor.Depth4;
-            DisplaySize = displaySize;
+            _cursorPen = new Pen(Color.Red);
             _pixelBrush = new SolidBrush(Color.Black);
-            _tokenSource = new CancellationTokenSource();
-            _task = StartProcessImageTask(_tokenSource.Token);
         }
 
         public void Dispose()
         {
-            // Cancel the image processing
-            _tokenSource.Cancel();
-
-            // Wait until the task really has been finished
-            _task?.Wait();
-
-            // Now dispose image related stuff
             _cursorPen?.Dispose();
             _pixelBrush?.Dispose();
         }
 
-        private async Task StartProcessImageTask(CancellationToken token)
+        public Image GetZoomedImage(Size displaySize, int zoomFactor)
         {
-            await Task.Factory.StartNew(() =>
-            {
-                while (!token.IsCancellationRequested)
-                {
-                    ProcessImage();
-                }
-            }, TaskCreationOptions.LongRunning);
-        }
+            var grabRect = ZoomRectCalculator.GetGrabRectangle(displaySize, zoomFactor);
+            var cursorRect = ZoomRectCalculator.GetCursorRectangle(displaySize, zoomFactor);
+            var result = GetAccurateImage(displaySize, grabRect, cursorRect, zoomFactor);
 
-        private void ProcessImage()
-        {
-            var zoomFactor = (int)ZoomFactor;
-
-            var grabRect = ZoomRectCalculator.GetGrabRectangle(DisplaySize, zoomFactor);
-
-            var cursorRect = ZoomRectCalculator.GetCursorRectangle(DisplaySize, zoomFactor);
-
-            var result = GetAccurateImage(DisplaySize, grabRect, cursorRect, zoomFactor);
-
-            NotifyNewImage(result);
+            return result;
         }
 
         private Image GetAccurateImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
@@ -101,11 +67,6 @@ namespace A9N.PixelZoomDlx.Zoom
             }
 
             return resultBitmap;
-        }
-
-        private void NotifyNewImage(Image image)
-        {
-            NewImage?.Invoke(this, image);
         }
     }
 }

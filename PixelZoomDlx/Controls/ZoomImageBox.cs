@@ -82,7 +82,7 @@ namespace A9N.PixelZoomDlx.Controls
         {
             base.OnResize(e);
 
-            _painter.SetDisplaySize(Size);
+            _painter.DisplaySize = Size;
         }
 
         private void Painter_NewImage(object sender, Image e)

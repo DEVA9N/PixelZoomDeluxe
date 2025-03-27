@@ -6,85 +6,60 @@ using System.Windows.Forms;
 
 namespace A9N.PixelZoomDlx.Zoom
 {
-    class ZoomPainter : IDisposable
+    internal class ZoomPainter : IDisposable
     {
-        private Size _displaySize;
-        private Pen _cursorPen = new Pen(Color.Red);
-        private SolidBrush _pixelBrush;
-        private readonly Object _paintLock = new Object();
-        private Task _task;
-        private CancellationTokenSource _tokenSource;
+        private readonly Pen _cursorPen = new Pen(Color.Red);
+        private readonly SolidBrush _pixelBrush;
+        private readonly Task _task;
+        private readonly CancellationTokenSource _tokenSource;
 
         internal event EventHandler<Image> NewImage;
 
+        public Size DisplaySize { get; set; }
         public ZoomFactor ZoomFactor { get; set; }
 
         public ZoomPainter(Size displaySize)
         {
-            this.ZoomFactor = ZoomFactor.Depth4;
-            _displaySize = displaySize;
+            ZoomFactor = ZoomFactor.Depth4;
+            DisplaySize = displaySize;
             _pixelBrush = new SolidBrush(Color.Black);
-
-            StartProcessImageTask();
+            _tokenSource = new CancellationTokenSource();
+            _task = StartProcessImageTask(_tokenSource.Token);
         }
 
         public void Dispose()
         {
             // Cancel the image processing
-            if (_tokenSource != null)
-            {
-                _tokenSource.Cancel();
-                _tokenSource = null;
-            }
+            _tokenSource.Cancel();
 
             // Wait until the task really has been finished
-            if (_task != null)
-            {
-                _task.Wait();
-                _task = null;
-            }
+            _task?.Wait();
 
             // Now dispose image related stuff
-            if (_cursorPen != null)
-            {
-                _cursorPen.Dispose();
-                _cursorPen = null;
-            }
-
-            if (_pixelBrush != null)
-            {
-                _pixelBrush.Dispose();
-                _pixelBrush = null;
-            }
+            _cursorPen?.Dispose();
+            _pixelBrush?.Dispose();
         }
 
-        private void StartProcessImageTask()
+        private async Task StartProcessImageTask(CancellationToken token)
         {
-            _tokenSource = new CancellationTokenSource();
-            var token = _tokenSource.Token;
-
-            Action processImage = () =>
+            await Task.Factory.StartNew(() =>
             {
                 while (!token.IsCancellationRequested)
                 {
                     ProcessImage();
-
-                    Thread.Sleep(1);
                 }
-            };
-
-            _task = Task.Factory.StartNew(processImage);
+            }, TaskCreationOptions.LongRunning);
         }
 
         private void ProcessImage()
         {
-            var zoomFactor = (int)this.ZoomFactor;
+            var zoomFactor = (int)ZoomFactor;
 
-            var grabRect = ZoomRectCalculator.GetGrabRectangle(_displaySize, zoomFactor);
+            var grabRect = ZoomRectCalculator.GetGrabRectangle(DisplaySize, zoomFactor);
 
-            var cursorRect = ZoomRectCalculator.GetCursorRectangle(_displaySize, zoomFactor);
+            var cursorRect = ZoomRectCalculator.GetCursorRectangle(DisplaySize, zoomFactor);
 
-            var result = GetAccurateImage(_displaySize, grabRect, cursorRect, zoomFactor);
+            var result = GetAccurateImage(DisplaySize, grabRect, cursorRect, zoomFactor);
 
             NotifyNewImage(result);
         }
@@ -107,20 +82,16 @@ namespace A9N.PixelZoomDlx.Zoom
                 {
                     resultGraphics.Clear(Color.Black);
 
-                    for (int ty = grabRect.Height - 1; ty > 0; ty--)
+                    for (var ty = grabRect.Height - 1; ty > 0; ty--)
                     {
-                        for (int tx = grabRect.Width - 1; tx > 0; tx--)
+                        for (var tx = grabRect.Width - 1; tx > 0; tx--)
                         {
-                            int resultPositionY = (ty - 1) * zoomFactor - 1;
-                            int resultPositionX = (tx - 1) * zoomFactor - 1;
+                            var resultPositionY = (ty - 1) * zoomFactor - 1;
+                            var resultPositionX = (tx - 1) * zoomFactor - 1;
 
                             _pixelBrush.Color = sourceBitmap.GetPixel(tx, ty);
 
-                            resultGraphics.FillRectangle(_pixelBrush,
-                                resultPositionX,
-                                resultPositionY,
-                                zoomFactor,
-                                zoomFactor);
+                            resultGraphics.FillRectangle(_pixelBrush, resultPositionX, resultPositionY, zoomFactor, zoomFactor);
                         }
                     }
 
@@ -136,15 +107,5 @@ namespace A9N.PixelZoomDlx.Zoom
         {
             NewImage?.Invoke(this, image);
         }
-
-        public void SetDisplaySize(Size size)
-        {
-            lock (_paintLock)
-            {
-                _displaySize = size;
-            }
-        }
-
-
     }
 }

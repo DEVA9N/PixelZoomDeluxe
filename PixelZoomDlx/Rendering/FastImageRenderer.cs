@@ -6,7 +6,7 @@ using A9N.PixelZoomDlx.Extensions;
 
 namespace A9N.PixelZoomDlx.Rendering
 {
-    public sealed class FastImageRenderer : IImageRenderer, IDisposable
+    public sealed class FastImageRenderer : IImageRenderer
     {
         private readonly Pen _cursorPen;
 

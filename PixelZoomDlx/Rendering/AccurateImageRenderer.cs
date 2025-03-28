@@ -5,7 +5,7 @@ using A9N.PixelZoomDlx.Extensions;
 
 namespace A9N.PixelZoomDlx.Rendering
 {
-    internal sealed class AccurateImageRenderer : IImageRenderer, IDisposable
+    internal sealed class AccurateImageRenderer : IImageRenderer
     {
         private readonly Pen _cursorPen;
 

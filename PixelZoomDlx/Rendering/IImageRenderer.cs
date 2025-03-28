@@ -1,8 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace A9N.PixelZoomDlx.Rendering
 {
-    interface IImageRenderer
+    interface IImageRenderer : IDisposable
     {
         Image GetImage(Size displaySize, int zoomFactor);
     }

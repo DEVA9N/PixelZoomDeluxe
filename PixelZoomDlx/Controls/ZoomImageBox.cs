@@ -9,10 +9,8 @@ namespace A9N.PixelZoomDlx.Controls
     internal sealed class ZoomImageBox : PictureBox
     {
         private ZoomFactor _zoomFactor;
-        private readonly AccurateImageRenderer _painter;
         private readonly CancellationTokenSource _tokenSource;
         private readonly IImageRenderer _renderer;
-        [Flags]
         private enum ZoomFactor
         {
             Depth4 = 4,
@@ -26,17 +24,16 @@ namespace A9N.PixelZoomDlx.Controls
         public ZoomImageBox()
         {
             _zoomFactor = ZoomFactor.Depth4;
-            _painter = new AccurateImageRenderer();
             _tokenSource = new CancellationTokenSource();
             _renderer = new AccurateImageRenderer();
             //_renderer = new FastImageRenderer();
         }
 
-        protected override void OnCreateControl()
+        protected async override void OnCreateControl()
         {
             base.OnCreateControl();
 
-            StartImageProcessing(_tokenSource.Token);
+           await StartImageProcessing(_tokenSource.Token);
         }
 
         protected override void Dispose(bool disposing)
@@ -46,7 +43,7 @@ namespace A9N.PixelZoomDlx.Controls
             if (disposing)
             {
                 _tokenSource.Cancel();
-                _painter.Dispose();
+                _renderer.Dispose();
             }
         }
 

@@ -24,16 +24,12 @@ namespace A9N.PixelZoomDlx.Rendering
         {
             var grabRect = displaySize.ToGrabRectangle(zoomFactor);
             var cursorRect = displaySize.ToCursorRectangle(zoomFactor);
-            var result = GetImage(displaySize, grabRect, cursorRect, zoomFactor);
+            var result = GetImage(displaySize, grabRect, cursorRect);
 
             return result;
         }
 
-        /// <summary>
-        /// This is an try for a fast image display. The quality is very poor due to
-        /// much aliasing or something similar. 
-        /// </summary>
-        public Image GetImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
+        private Image GetImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect)
         {
             using (var screenGrabBitmap = new Bitmap(grabRect.Width, grabRect.Height))
             {

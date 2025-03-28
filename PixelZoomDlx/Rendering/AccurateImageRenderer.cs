@@ -28,12 +28,13 @@ namespace A9N.PixelZoomDlx.Rendering
             return result;
         }
 
-        public Image GetImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
+        private Image GetImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
         {
             var resultBitmap = new Bitmap(displaySize.Width, displaySize.Height);
 
             using (var sourceBitmap = new Bitmap(grabRect.Width, grabRect.Height))
             {
+                // Copy screen to bitmap
                 using (var screenGraphics = Graphics.FromImage(sourceBitmap))
                 {
                     var sourceX = Cursor.Position.X - grabRect.Width / 2;
@@ -42,6 +43,7 @@ namespace A9N.PixelZoomDlx.Rendering
                     screenGraphics.CopyFromScreen(sourceX, sourceY, 0, 0, grabRect.Size);
                 }
 
+                // Draw zoomed image
                 using (var resultGraphics = Graphics.FromImage(resultBitmap))
                 {
                     resultGraphics.Clear(Color.Black);
@@ -50,8 +52,8 @@ namespace A9N.PixelZoomDlx.Rendering
                     {
                         for (var tx = grabRect.Width - 1; tx > 0; tx--)
                         {
-                            var resultPositionY = (ty - 1) * zoomFactor - 1;
-                            var resultPositionX = (tx - 1) * zoomFactor - 1;
+                            var resultPositionY = ((ty - 1) * zoomFactor) - 1;
+                            var resultPositionX = ((tx - 1) * zoomFactor) - 1;
 
                             using (var pixelBrush = new SolidBrush(sourceBitmap.GetPixel(tx, ty)))
                             {

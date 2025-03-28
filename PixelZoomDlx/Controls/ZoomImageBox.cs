@@ -53,7 +53,15 @@ namespace A9N.PixelZoomDlx.Controls
             {
                 while (!token.IsCancellationRequested)
                 {
-                    Image = _renderer.GetImage(Size, (int)_zoomFactor);
+                    try
+                    {
+                        Image = _renderer.GetImage(Size, (int)_zoomFactor);
+                    }
+                    catch (Exception)
+                    {
+                        // Very rarely a thread exception occurs when the image is assigned from another thread that I cannot reproduce
+                        // This is a workaround to prevent the application from crashing
+                    }
                 }
             }, TaskCreationOptions.LongRunning);
         }

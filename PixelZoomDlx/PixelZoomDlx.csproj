@@ -96,6 +96,8 @@
     <Compile Include="Windows\MouseController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rendering\FastImageRenderer.cs" />
+    <Compile Include="Rendering\IImageRenderer.cs" />
     <Compile Include="Zoom\ZoomRectCalculator.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -126,7 +128,7 @@
     </Compile>
     <Compile Include="Windows\WindowsApi.cs" />
     <Compile Include="Zoom\ZoomEnums.cs" />
-    <Compile Include="Zoom\ZoomPainter.cs" />
+    <Compile Include="Rendering\AccurateImageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

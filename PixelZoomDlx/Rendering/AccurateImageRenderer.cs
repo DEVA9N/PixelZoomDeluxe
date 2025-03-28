@@ -1,36 +1,34 @@
-﻿using System;
+﻿using A9N.PixelZoomDlx.Zoom;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace A9N.PixelZoomDlx.Zoom
+namespace A9N.PixelZoomDlx.Rendering
 {
-    internal sealed class ZoomPainter : IDisposable
+    internal sealed class AccurateImageRenderer : IImageRenderer, IDisposable
     {
         private readonly Pen _cursorPen;
-        private readonly SolidBrush _pixelBrush;
 
-        public ZoomPainter()
+        public AccurateImageRenderer()
         {
             _cursorPen = new Pen(Color.Red);
-            _pixelBrush = new SolidBrush(Color.Black);
         }
 
         public void Dispose()
         {
             _cursorPen?.Dispose();
-            _pixelBrush?.Dispose();
         }
 
-        public Image GetZoomedImage(Size displaySize, int zoomFactor)
+        public Image GetImage(Size displaySize, int zoomFactor)
         {
             var grabRect = ZoomRectCalculator.GetGrabRectangle(displaySize, zoomFactor);
             var cursorRect = ZoomRectCalculator.GetCursorRectangle(displaySize, zoomFactor);
-            var result = GetAccurateImage(displaySize, grabRect, cursorRect, zoomFactor);
+            var result = GetImage(displaySize, grabRect, cursorRect, zoomFactor);
 
             return result;
         }
 
-        private Image GetAccurateImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
+        public Image GetImage(Size displaySize, Rectangle grabRect, Rectangle cursorRect, int zoomFactor)
         {
             var resultBitmap = new Bitmap(displaySize.Width, displaySize.Height);
 
@@ -55,9 +53,10 @@ namespace A9N.PixelZoomDlx.Zoom
                             var resultPositionY = (ty - 1) * zoomFactor - 1;
                             var resultPositionX = (tx - 1) * zoomFactor - 1;
 
-                            _pixelBrush.Color = sourceBitmap.GetPixel(tx, ty);
-
-                            resultGraphics.FillRectangle(_pixelBrush, resultPositionX, resultPositionY, zoomFactor, zoomFactor);
+                            using (var pixelBrush = new SolidBrush(sourceBitmap.GetPixel(tx, ty)))
+                            {
+                                resultGraphics.FillRectangle(pixelBrush, resultPositionX, resultPositionY, zoomFactor, zoomFactor);
+                            }
                         }
                     }
 

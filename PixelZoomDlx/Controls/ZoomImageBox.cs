@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using A9N.PixelZoomDlx.Rendering;
 using A9N.PixelZoomDlx.Zoom;
 
 namespace A9N.PixelZoomDlx.Controls
@@ -9,17 +11,19 @@ namespace A9N.PixelZoomDlx.Controls
     internal sealed class ZoomImageBox : PictureBox
     {
         private ZoomFactor _zoomFactor;
-        private readonly ZoomPainter _painter;
+        private readonly AccurateImageRenderer _painter;
         private readonly CancellationTokenSource _tokenSource;
+        private readonly IImageRenderer _renderer;
 
         public bool CanZoomOut => _zoomFactor > ZoomFactor.Depth4;
         public bool CanZoomIn => _zoomFactor < ZoomFactor.Depth8;
-        
+
         public ZoomImageBox()
         {
             _zoomFactor = ZoomFactor.Depth4;
-            _painter = new ZoomPainter();
+            _painter = new AccurateImageRenderer();
             _tokenSource = new CancellationTokenSource();
+            _renderer = new AccurateImageRenderer();
         }
 
         protected override void OnCreateControl()
@@ -46,7 +50,7 @@ namespace A9N.PixelZoomDlx.Controls
             {
                 while (!token.IsCancellationRequested)
                 {
-                    Image = _painter.GetZoomedImage(Size, (int)_zoomFactor);
+                    Image = _renderer.GetImage(Size, (int)_zoomFactor);
                 }
             }, TaskCreationOptions.LongRunning);
         }

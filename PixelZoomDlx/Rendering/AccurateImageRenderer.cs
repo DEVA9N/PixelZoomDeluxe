@@ -21,8 +21,8 @@ namespace A9N.PixelZoomDlx.Rendering
 
         public Image GetImage(Size displaySize, int zoomFactor)
         {
-            var grabRect = ZoomRectCalculator.GetGrabRectangle(displaySize, zoomFactor);
-            var cursorRect = ZoomRectCalculator.GetCursorRectangle(displaySize, zoomFactor);
+            var grabRect = displaySize.ToGrabRectangle(zoomFactor);
+            var cursorRect = displaySize.ToCursorRectangle(zoomFactor);
             var result = GetImage(displaySize, grabRect, cursorRect, zoomFactor);
 
             return result;

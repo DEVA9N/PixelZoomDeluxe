@@ -1,8 +1,8 @@
 using System.Drawing;
 
-namespace A9N.PixelZoomDlx.Zoom
+namespace A9N.PixelZoomDlx.Extensions
 {
-    internal static class ZoomRectCalculator
+    internal static class SizeExtension
     {
         internal static Rectangle ToGrabRectangle(this Size displaySize, int zoomFactor)
         {

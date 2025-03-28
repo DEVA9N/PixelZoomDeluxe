@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using A9N.PixelZoomDlx.Rendering;
-using A9N.PixelZoomDlx.Zoom;
 
 namespace A9N.PixelZoomDlx.Controls
 {
@@ -14,9 +12,16 @@ namespace A9N.PixelZoomDlx.Controls
         private readonly AccurateImageRenderer _painter;
         private readonly CancellationTokenSource _tokenSource;
         private readonly IImageRenderer _renderer;
+        [Flags]
+        private enum ZoomFactor
+        {
+            Depth4 = 4,
+            Depth8 = 8,
+            Depth16 = 16,
+        }
 
         public bool CanZoomOut => _zoomFactor > ZoomFactor.Depth4;
-        public bool CanZoomIn => _zoomFactor < ZoomFactor.Depth8;
+        public bool CanZoomIn => _zoomFactor < ZoomFactor.Depth16;
 
         public ZoomImageBox()
         {
@@ -24,6 +29,7 @@ namespace A9N.PixelZoomDlx.Controls
             _painter = new AccurateImageRenderer();
             _tokenSource = new CancellationTokenSource();
             _renderer = new AccurateImageRenderer();
+            //_renderer = new FastImageRenderer();
         }
 
         protected override void OnCreateControl()

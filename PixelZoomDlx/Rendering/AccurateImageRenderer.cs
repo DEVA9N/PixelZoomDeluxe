@@ -1,7 +1,7 @@
-﻿using A9N.PixelZoomDlx.Zoom;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using A9N.PixelZoomDlx.Extensions;
 
 namespace A9N.PixelZoomDlx.Rendering
 {

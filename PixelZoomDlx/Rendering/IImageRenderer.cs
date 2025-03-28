@@ -1,5 +1,4 @@
-﻿using A9N.PixelZoomDlx.Zoom;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace A9N.PixelZoomDlx.Rendering
 {

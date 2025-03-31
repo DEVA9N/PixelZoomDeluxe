@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Windows.Forms;
-using A9N.PixelZoomDeluxe.Rendering;
+﻿using A9N.PixelZoomDeluxe.Rendering;
 
 namespace A9N.PixelZoomDeluxe.Controls
 {

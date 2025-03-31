@@ -9,8 +9,8 @@
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>A9N.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <ApplicationIcon>Resources\1460128757_search.ico</ApplicationIcon>
-    <AssemblyVersion>1.2.0.1</AssemblyVersion>
-    <FileVersion>1.2.0.1</FileVersion>
+    <AssemblyVersion>1.2.0.4</AssemblyVersion>
+    <FileVersion>1.2.0.4</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

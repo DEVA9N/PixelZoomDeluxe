@@ -1,9 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using A9N.PixelZoomDlx.Extensions;
-
-namespace A9N.PixelZoomDlx.Rendering
+﻿namespace A9N.PixelZoomDeluxe.Rendering
 {
     internal sealed class AccurateImageRenderer : IImageRenderer
     {

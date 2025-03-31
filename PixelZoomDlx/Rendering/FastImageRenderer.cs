@@ -1,10 +1,6 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using A9N.PixelZoomDlx.Extensions;
+﻿using System.Drawing.Drawing2D;
 
-namespace A9N.PixelZoomDlx.Rendering
+namespace A9N.PixelZoomDeluxe.Rendering
 {
     public sealed class FastImageRenderer : IImageRenderer
     {

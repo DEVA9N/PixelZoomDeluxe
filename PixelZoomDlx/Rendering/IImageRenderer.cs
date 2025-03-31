@@ -1,10 +1,6 @@
-﻿using System;
-using System.Drawing;
+﻿namespace A9N.PixelZoomDeluxe.Rendering;
 
-namespace A9N.PixelZoomDlx.Rendering
+interface IImageRenderer : IDisposable
 {
-    interface IImageRenderer : IDisposable
-    {
-        Image GetImage(Size displaySize, int zoomFactor);
-    }
+    Image GetImage(Size displaySize, int zoomFactor);
 }

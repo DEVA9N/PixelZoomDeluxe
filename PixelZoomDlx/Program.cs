@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
+namespace A9N.PixelZoomDeluxe;
 
-namespace A9N.PixelZoomDlx
+internal static class Program
 {
-	static class Program
-	{
-		/// <summary>
-		/// Der Haupteinstiegspunkt für die Anwendung.
-		/// </summary>
-		[STAThread]
-		static void Main()
-		{
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainWindow());
-		}
-	}
+    /// <summary>
+    ///  The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    static void Main()
+    {
+        // To customize application configuration such as set high DPI settings or default font,
+        // see https://aka.ms/applicationconfiguration.
+        ApplicationConfiguration.Initialize();
+        Application.Run(new MainWindow());
+    }
 }

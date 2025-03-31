@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace A9N.PixelZoomDlx.Extensions
+namespace A9N.PixelZoomDeluxe.Extensions
 {
     internal static class SizeExtension
     {

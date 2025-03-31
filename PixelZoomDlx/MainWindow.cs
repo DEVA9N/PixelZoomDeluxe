@@ -7,10 +7,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using A9N.PixelZoomDlx.Properties;
-using A9N.PixelZoomDlx.Windows;
+using A9N.PixelZoomDeluxe.Properties;
+using A9N.PixelZoomDeluxe.Windows;
 
-namespace A9N.PixelZoomDlx
+namespace A9N.PixelZoomDeluxe
 {
     public partial class MainWindow : Form
     {

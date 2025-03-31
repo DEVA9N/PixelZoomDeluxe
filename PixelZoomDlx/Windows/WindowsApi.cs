@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace A9N.PixelZoomDlx.Windows
+namespace A9N.PixelZoomDeluxe.Windows
 {
     class WindowsApi
     {

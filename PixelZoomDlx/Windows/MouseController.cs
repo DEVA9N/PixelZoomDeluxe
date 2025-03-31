@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace A9N.PixelZoomDlx.Windows
+namespace A9N.PixelZoomDeluxe.Windows
 {
     internal sealed class MouseController
     {

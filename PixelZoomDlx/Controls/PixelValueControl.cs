@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace A9N.PixelZoomDlx
+namespace A9N.PixelZoomDeluxe
 {
     public partial class PixelValueControl : UserControl
     {

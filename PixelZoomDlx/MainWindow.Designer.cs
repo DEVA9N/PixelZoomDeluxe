@@ -1,6 +1,6 @@
-﻿using A9N.PixelZoomDlx.Controls;
+﻿using A9N.PixelZoomDeluxe.Controls;
 
-namespace A9N.PixelZoomDlx
+namespace A9N.PixelZoomDeluxe
 {
 	partial class MainWindow
 	{
@@ -37,10 +37,10 @@ namespace A9N.PixelZoomDlx
             this.buttonZoomIn = new System.Windows.Forms.Button();
             this.checkBoxMouseSpeed = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.currentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
-            this.recentPixelBox = new A9N.PixelZoomDlx.PixelValueControl();
-            this.distanceBox = new A9N.PixelZoomDlx.PixelValueControl();
-            this.pictureBox = new A9N.PixelZoomDlx.Controls.ZoomImageBox();
+            this.currentPixelBox = new A9N.PixelZoomDeluxe.PixelValueControl();
+            this.recentPixelBox = new A9N.PixelZoomDeluxe.PixelValueControl();
+            this.distanceBox = new A9N.PixelZoomDeluxe.PixelValueControl();
+            this.pictureBox = new A9N.PixelZoomDeluxe.Controls.ZoomImageBox();
             this.flowLayoutPanelRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();

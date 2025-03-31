@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
-using A9N.PixelZoomDlx.Rendering;
+using A9N.PixelZoomDeluxe.Rendering;
 
-namespace A9N.PixelZoomDlx.Controls
+namespace A9N.PixelZoomDeluxe.Controls
 {
     internal sealed class ZoomImageBox : PictureBox
     {

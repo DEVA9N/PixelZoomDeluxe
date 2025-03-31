@@ -1,64 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
-namespace A9N.PixelZoomDeluxe
+namespace A9N.PixelZoomDeluxe.Controls;
+
+public partial class PixelValueControl : UserControl
 {
-    public partial class PixelValueControl : UserControl
+    private Point _position;
+    private Color _pixelColor;
+
+    public PixelValueControl()
     {
-        private Point position;
-        private Color pixelColor;
+        InitializeComponent();
+    }
 
-        public PixelValueControl()
+    [DefaultValue(null)]
+    public Color PixelColor
+    {
+        get => _pixelColor;
+        set
         {
-            InitializeComponent();
-        }
-
-        public Color PixelColor
-        {
-            get { return pixelColor; }
-            set
-            {
-                pixelColor = value;
+            _pixelColor = value;
                 
-                textboxARGBValue.Text = $@"{pixelColor.R} {pixelColor.G} {pixelColor.B}";
-                textBoxHexValue.Text = $@"#{pixelColor.A:X2}{pixelColor.R:X2}{pixelColor.G:X2}{pixelColor.B:X2}";
-            }
+            textboxARGBValue.Text = $@"{_pixelColor.R} {_pixelColor.G} {_pixelColor.B}";
+            textBoxHexValue.Text = $@"#{_pixelColor.A:X2}{_pixelColor.R:X2}{_pixelColor.G:X2}{_pixelColor.B:X2}";
         }
+    }
 
-        public Point Position
+    [DefaultValue(null)]
+    public Point Position
+    {
+        get => _position;
+        set
         {
-            get { return position; }
-            set
-            {
-                position = value;
+            _position = value;
                 
-                textboxXValue.Text = position.X.ToString();
-                textboxYValue.Text = position.Y.ToString();
-            }
+            textboxXValue.Text = _position.X.ToString();
+            textboxYValue.Text = _position.Y.ToString();
         }
+    }
 
-        public bool ShowColor
+    [DefaultValue(false)]
+    public bool ShowColor
+    {
+        get => labelARGB.Visible;
+        set
         {
-            get { return labelARGB.Visible; }
-            set
-            {
-                labelARGB.Visible = value;
-                textboxARGBValue.Visible = value;
-                labelHex.Visible = value;
-                textBoxHexValue.Visible = value;
-            }
+            labelARGB.Visible = value;
+            textboxARGBValue.Visible = value;
+            labelHex.Visible = value;
+            textBoxHexValue.Visible = value;
         }
+    }
 
-        public override String Text
-        {
-            get { return groupBox1.Text; }
-            set { groupBox1.Text = value; }
-        }
+    [DefaultValue(null)]
+    public override String Text
+    {
+        get => groupBox1.Text;
+        [param: AllowNull] set => groupBox1.Text = value;
     }
 }

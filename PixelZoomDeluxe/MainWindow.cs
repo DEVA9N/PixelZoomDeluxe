@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Deployment.Application;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Reflection;
 using A9N.PixelZoomDeluxe.Properties;
 using A9N.PixelZoomDeluxe.Windows;
 
@@ -31,28 +23,21 @@ namespace A9N.PixelZoomDeluxe
 
         private void InitializePixelValueBoxes()
         {
-            this.currentPixelBox.Text = Resources.MainWindow_Current;
-            this.recentPixelBox.Text = Resources.MainWindow_Recent;
-            this.distanceBox.Text = Resources.MainWindow_Distance;
+            currentPixelBox.Text = Resources.MainWindow_Current;
+            recentPixelBox.Text = Resources.MainWindow_Recent;
+            distanceBox.Text = Resources.MainWindow_Distance;
         }
 
         private void AddVersionTitle()
         {
-            try
-            {
-                var version = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
 
-                this.Text += $" - {version}";
-            }
-            catch (Exception e)
-            {
-                // Throws exception if application is not deployed
-            }
+            Text += $" - {version}";
         }
 
         private void UpdatePixelBoxValues()
         {
-            // Assing outdated current values to recent pixel box control
+            // Assign outdated current values to recent pixel box control
             recentPixelBox.Position = currentPixelBox.Position;
             recentPixelBox.PixelColor = currentPixelBox.PixelColor;
 
@@ -65,10 +50,10 @@ namespace A9N.PixelZoomDeluxe
 
         public static Point GetDistance(Point currentPosition, Point recentPosition)
         {
-            int varianceX = recentPosition.X.CompareTo(currentPosition.X);
-            int varianceY = recentPosition.Y.CompareTo(currentPosition.Y);
-            int lengthX = recentPosition.X - currentPosition.X + varianceX;
-            int lengthY = recentPosition.Y - currentPosition.Y + varianceY;
+            var varianceX = recentPosition.X.CompareTo(currentPosition.X);
+            var varianceY = recentPosition.Y.CompareTo(currentPosition.Y);
+            var lengthX = recentPosition.X - currentPosition.X + varianceX;
+            var lengthY = recentPosition.Y - currentPosition.Y + varianceY;
 
             return new Point(lengthX, lengthY);
         }

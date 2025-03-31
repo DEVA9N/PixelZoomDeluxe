@@ -1,19 +1,15 @@
 ﻿using System.Drawing.Drawing2D;
+using A9N.PixelZoomDeluxe.Extensions;
 
 namespace A9N.PixelZoomDeluxe.Rendering
 {
     public sealed class FastImageRenderer : IImageRenderer
     {
-        private readonly Pen _cursorPen;
-
-        public FastImageRenderer()
-        {
-            _cursorPen = new Pen(Color.DeepSkyBlue);
-        }
+        private readonly Pen _cursorPen = new(Color.DeepSkyBlue);
 
         public void Dispose()
         {
-            _cursorPen?.Dispose();
+            _cursorPen.Dispose();
         }
 
         public Image GetImage(Size displaySize, int zoomFactor)

@@ -1,4 +1,4 @@
-﻿namespace A9N.PixelZoomDeluxe
+﻿namespace A9N.PixelZoomDeluxe.Controls
 {
 	partial class PixelValueControl
 	{

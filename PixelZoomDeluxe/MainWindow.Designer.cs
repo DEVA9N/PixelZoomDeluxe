@@ -37,9 +37,9 @@ namespace A9N.PixelZoomDeluxe
             this.buttonZoomIn = new System.Windows.Forms.Button();
             this.checkBoxMouseSpeed = new System.Windows.Forms.CheckBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.currentPixelBox = new A9N.PixelZoomDeluxe.PixelValueControl();
-            this.recentPixelBox = new A9N.PixelZoomDeluxe.PixelValueControl();
-            this.distanceBox = new A9N.PixelZoomDeluxe.PixelValueControl();
+            this.currentPixelBox = new PixelValueControl();
+            this.recentPixelBox = new PixelValueControl();
+            this.distanceBox = new PixelValueControl();
             this.pictureBox = new A9N.PixelZoomDeluxe.Controls.ZoomImageBox();
             this.flowLayoutPanelRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();

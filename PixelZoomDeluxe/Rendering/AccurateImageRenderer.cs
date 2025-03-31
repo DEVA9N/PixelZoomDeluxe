@@ -1,17 +1,14 @@
-﻿namespace A9N.PixelZoomDeluxe.Rendering
+﻿using A9N.PixelZoomDeluxe.Extensions;
+
+namespace A9N.PixelZoomDeluxe.Rendering
 {
     internal sealed class AccurateImageRenderer : IImageRenderer
     {
-        private readonly Pen _cursorPen;
-
-        public AccurateImageRenderer()
-        {
-            _cursorPen = new Pen(Color.Red);
-        }
+        private readonly Pen _cursorPen = new(Color.Red);
 
         public void Dispose()
         {
-            _cursorPen?.Dispose();
+            _cursorPen.Dispose();
         }
 
         public Image GetImage(Size displaySize, int zoomFactor)
